@@ -52,10 +52,25 @@ APPLICATION_NAME = 'MeetMe class project'
 @app.route("/")
 @app.route("/index")
 def index():
-  app.logger.debug("Entering index")
-  if 'begin_date' not in flask.session:
-    init_session_values()
-  return render_template('index.html')
+    app.logger.debug("Entering index")
+    if 'begin_date' not in flask.session:
+        init_session_values()
+    return render_template('index.html')
+
+
+@app.route("/invite")
+def index1():
+    app.logger.debug("Entering invite")
+    if 'begin_date' not in flask.session:
+        init_session_values()
+    return render_template('invite.html')
+
+@app.route("/maker")
+def index2():
+    app.logger.debug("Entering maker")
+    if 'begin_date' not in flask.session:
+        init_session_values()
+    return render_template('maker.html')
 
 @app.route("/choose")
 def choose():
