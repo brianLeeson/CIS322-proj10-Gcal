@@ -33,9 +33,9 @@
 <body>
 <div class="container">
 
-<h1>Busy and Free times</h1>
+<h1>MeetMe</h1>
 
-<h2>Date range</h2>
+<h3>Date range</h3>
   <form action="/setrange" method="post">
   <input type="text" name="daterange" size="12"
     {% if session.daterange is defined %}
@@ -63,10 +63,15 @@
  </script>
 <br/>
 
-<h2>Time Range</h2>
-<input type="time" name="startTime" value="00:00:00">
-to
-<input type="time" name="endTime" value="23:59:00">
+<h3>Time Range</h3>
+  <input type="time" name="startTime" value="00:00:00">
+  to
+  <input type="time" name="endTime" value="23:59:00">
+  
+
+<h3>Meeting duration</h3>
+  Hours: <input type="number" min="0" max="10" value="0"><br>
+  Minutes: <input type="number" min="0" max="60" value="0">
 
 <br>
 <input type="submit" value="Choose Calendar" />
@@ -96,14 +101,16 @@ to
            {% endfor %}
           </div><br>
   {% endfor %}
-  <input type="submit" value="Show Times" id="show_times">
+  <!--<input type="submit" value="Show Times" id="show_times">old -->
+  <input type="submit" value="Finish" id="finish">
   </div>
 {% endif %}
     
 <div id="target"></div>	
   <script>
-  $("#show_times").click(function(event){
-    //console.log("you clicked Show Times")
+  //This function needs to send the 
+  $("#finish").click(function(event){
+    //console.log("you clicked finish")
     var checkBoxes = $(".checkbox");
     //console.log("list of checked boxes: " + checkBoxes)
     var checkedList = "";
