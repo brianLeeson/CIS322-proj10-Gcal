@@ -1,5 +1,5 @@
 #
-#  Project 7: Pull Google calendar events 
+#  Project 10: MeetMe
 
 
 # ###########################################
@@ -48,8 +48,16 @@ INVENV = . env/bin/activate ;
 # 'make run' runs Flask's built-in test server, 
 #  with debugging turned on unless it is unset in CONFIG.py
 # 
-run:	env
+run:	env  database_exists
 	($(INVENV) python3 flask_main.py) ||  true
+
+database_exists: 
+	($(INVENV) python3 create_db.py) || true
+	touch database_exists   # We're using its existence as a flag
+
+destroy: 
+	($(INVENV)  python3 destroy_db.py) || true
+	rm database_exists
 
 # 'make service' runs as a background job under the gunicorn 
 #  WSGI server. FIXME:  A real production service would use 
