@@ -12,9 +12,9 @@ def relevantEvents(eventList, rangeStart, rangeEnd):
   Credit: Sam Oberg helped with the logic for this function
   """
   """
-  print("eventList is:", eventList)
-  print("rangeStart is:", rangeStart)
-  print("rangeEnd is:", rangeEnd)
+  #print("eventList is:", eventList)
+  #print("rangeStart is:", rangeStart)
+  #print("rangeEnd is:", rangeEnd)
   """
   inRangeEvents = []
   for event in eventList:
@@ -211,6 +211,15 @@ def addFree(busyBlocks, startTime, endTime, startDate, endDate):
   """
   #print("freeBusySorted:", freeBusySorted)
   return freeBusySorted
+
+def dbInsert(list):
+  """
+  insert into the database
+  args: a list of lists of dicts. sublists = days, dicts = events
+  """
+
+  return None
+
 
 
 
