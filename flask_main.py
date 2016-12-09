@@ -59,17 +59,15 @@ def index():
 
 
 @app.route("/invite")
-def index1():
+def invite():
     app.logger.debug("Entering invite")
     if 'begin_date' not in flask.session:
         init_session_values()
     return render_template('invite.html')
 
 @app.route("/maker")
-def index2():
+def maker():
     app.logger.debug("Entering maker")
-    if 'begin_date' not in flask.session:
-        init_session_values()
     return render_template('maker.html')
 
 @app.route("/choose")
@@ -88,6 +86,23 @@ def choose():
     app.logger.debug("Returned from get_gcal_service")
     flask.g.calendars = list_calendars(gcal_service)
     return render_template('index.html')
+
+@app.route("/chooseInvite")
+def chooseInvite():
+    ## We'll need authorization to list calendars 
+    ## I wanted to put what follows into a function, but had
+    ## to pull it back here because the redirect has to be a
+    ## 'return' 
+    app.logger.debug("Checking credentials for Google calendar access")
+    credentials = valid_credentials()
+    if not credentials: #not None is True. weird.
+      app.logger.debug("Redirecting to authorization")
+      return flask.redirect(flask.url_for('oauth2callback'))
+
+    gcal_service = get_gcal_service(credentials)
+    app.logger.debug("Returned from get_gcal_service")
+    flask.g.calendars = list_calendars(gcal_service)
+    return render_template('invite.html')
 
 @app.route("/get_times")
 def get_times():
@@ -271,6 +286,14 @@ def setrange():
       flask.session['begin_date'], flask.session['end_date'],
       flask.session['begin_time'], flask.session['end_time']))
     return flask.redirect(flask.url_for("choose"))
+
+@app.route('/getfree', methods=['POST'])
+def getfree():
+    """
+    Send Free times to maker page
+    #flask.session = Free times from the database
+    """
+    return render_template('maker.html')
 
 ####
 #

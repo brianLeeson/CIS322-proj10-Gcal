@@ -1,4 +1,4 @@
-# proj8-Gcal
+# proj10-MeetMe
 AUTHOR: Brian Leeson, bel@cs.uoregon.edu  
 Skeleton code created by instructor: Michael Young  
 

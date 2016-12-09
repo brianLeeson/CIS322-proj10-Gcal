@@ -34,45 +34,27 @@
 <div class="container">
 
 <h1>MeetMe</h1>
-<p>Explain this project here.</p>
-<p>The date range is DATERANGE and the time range is TIMERANGE</p>
- </script>
-<br/>
-<input type="submit" value="Choose Calendar" />
-</form>
+  <p>From this page you are able to see the mutal free times of yourself 
+  and those pople that have responded to your invite.</p>
+<div id="free_times"></div>	
+<br>
 
-    <!--
-    Show the calendar list (if we have it).  This will need to be turned into
-    a form from which calendars can be picked. Up to three entries are
-    shown in each row
-    -->
 
-{% if g.calendars is defined  %}
-  <div class="row">
-  {% for cal in g.calendars if cal.selected %}
-          <input type="checkbox", class = "header" id="{{loop.index}}"> Include Cal {{loop.index}}
-          <h3>Calendar {{loop.index}} is {{cal.summary}}</h3>
-          <div class="row_{{loop.index}} hide" name="cal {{loop.index}}" id= "calendar" style = "display:none;">
-          <p>Select Events to Include:</p> 
-	   {% for event in cal.events %}
-                    <div class="row">
-                    <input type="checkbox" class="checkbox"
-                     value= "{{event.start.dateTime}},{{event.end.dateTime}}">
-                    <b>Event: </b> {{ event.summary }} <br> 
-                    <b>Starts: </b> {{ event.start.dateTime }}
-                    <b>Ends: </b> {{ event.end.dateTime }}
-                   </div>
-           {% endfor %}
-          </div><br>
-  {% endfor %}
-  <input type="submit" value="Show Times" id="show_times">
-  </div>
-{% endif %}
-    
+<h3>Meeting Duration</h3>
+  Hours: <input type="number" min="0" max="10" value="0"><br>
+  Minutes: <input type="number" min="0" max="60" value="0"><br><br/>
+
+  <h3>Start Time</h3>
+  <input type="time" name="startTime" value="00:00:00">
+
+<form action="/getfree" method="post">
+<br><input type="submit" value="Ready">
+<form/>
+
 <div id="target"></div>	
   <script>
-  $("#show_times").click(function(event){
-    //console.log("you clicked Show Times")
+  $("#submit").click(function(event){
+    //console.log("you clicked submit")
     var checkBoxes = $(".checkbox");
     //console.log("list of checked boxes: " + checkBoxes)
     var checkedList = "";
@@ -100,6 +82,12 @@
     var str = ".row_" + this.id
     $(str).toggle();
   });
+
+  function init(){
+  console.log("this function will load free times.")
+  }
+
+  window.onload = init;
   </script>
 
 
