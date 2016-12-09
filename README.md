@@ -3,8 +3,8 @@ AUTHOR: Brian Leeson, bel@cs.uoregon.edu
 Skeleton code created by instructor: Michael Young  
 
 ## What is here
-A simple webpage that finds potentially busy and free times in a specific date and time range. <br>
-Project is incomplete pending the completion of proj9. Debugging code commented out for proj9. <br>
+ MeetMe Application. For creating a meeting time amongst people with google calendars<br>
+ MongoDB is used as a database to store events.<br>
 
 ## Installation and running
 Project only runnable with client_secrets.py, admin_secrets.py, and client_secret.json not included in the repo.
@@ -20,7 +20,9 @@ make configure
 make run  
 
 The default port is 5000. If your are on your own machine connect at localhost:5000.
-If the server is running another machine connect at ipAddress:5000.
+If the server is running on another machine connect at ipAddress:5000.
+
+MongoDB must been running on port -27333
 
 ## Testing the application
 
