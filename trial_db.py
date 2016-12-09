@@ -27,16 +27,6 @@ except Exception as err:
 #prints out all of the records in the database
 #TODO: This is how Sam does it. Use as Guide
 records = [ ] 
-for record in collection.find( { "type": "event" } ):
-   records.append(
-            {   "type": record["type"], 
-                "id": record["id"],
-                "creator": record["creator"],
-                "description": record["description"],
-                "duration": record["duration"], 
-                "daterange": record["daterange"],
-                "timerange": record["timerange"],
-                "is_confirmed": record["is_confirmed"],
-                "participants": record["participants"] } )
+for record in collection:
+   print(record)
 
-print(records)

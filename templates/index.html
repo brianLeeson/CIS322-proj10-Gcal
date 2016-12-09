@@ -118,14 +118,7 @@
     $.getJSON("/get_times", { checkedList: checkedList }, function(e) {
       //clear div before appending
       $("#target").html("")
-      e.result.key.forEach(function(day){
-        $("#target").append("<b>Schedule for the day " + day[0].start.substring(5,10) +"</b><br>" );
-        day.forEach(function(block){
-          var fbString = ("<b>Block is: </b>"+block.summary+"<b> Start: </b>"+ block.start.substring(11, 16)+"<b> End: </b>"+block.end.substring(11,16)+"<br>");
-          $("#target").append(fbString);
-        });
-      $("#target").append("<br>")
-      });
+      $("#target").append("You've succsessfully entered your information into the database. Here's a link to use to invite people:")
     });
   });
    

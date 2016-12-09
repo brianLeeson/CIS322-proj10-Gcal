@@ -9,6 +9,7 @@ import json
 import logging
 
 from process_events import *
+from pymongo import MongoClient
 
 # Date handling 
 import arrow # Replacement for datetime, based on moment.js
@@ -29,10 +30,24 @@ from apiclient import discovery
 import CONFIG
 import secrets.admin_secrets  # Per-machine secrets
 import secrets.client_secrets # Per-application secrets
-#  Note to CIS 322 students:  client_secrets is what you turn in.
-#     You need an admin_secrets, but the grader and I don't use yours. 
-#     We use our own admin_secrets file, along with your client_secrets
-#     file on our Raspberry Pis. 
+
+# Mongo database
+MONGO_CLIENT_URL = "mongodb://{}:{}@localhost:{}/{}".format(
+    secrets.client_secrets.db_user,
+    secrets.client_secrets.db_user_pw,
+    secrets.admin_secrets.port, 
+    secrets.client_secrets.db)
+
+
+#get refence to db
+try: 
+    dbclient = MongoClient(MONGO_CLIENT_URL)
+    db = getattr(dbclient, secrets.client_secrets.db)
+    collection = db.dated
+
+except:
+    print("Failure opening database.  Is Mongo running? Correct password?")
+    sys.exit(1)
 
 app = flask.Flask(__name__)
 app.debug=CONFIG.DEBUG
@@ -131,11 +146,12 @@ def get_times():
 
     #merge busy events into busy blocks
     busyBlocks = mergeBusy(groupedEvents)
+
+    #add busyBlocks to db
+    #collection.insert(busyBlocks)
     
     #add free times 
     timeBlocks = addFree(busyBlocks, flask.session["begin_time"], flask.session["end_time"], flask.session["begin_date"], flask.session["end_date"])
-    
-    #add busyBlocks to db
 
     #send list of lists of dicts containing free/busy blocks to the client to display 
     return jsonify(result = { "key" : timeBlocks })
