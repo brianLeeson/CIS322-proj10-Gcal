@@ -1,10 +1,3 @@
-"""
-Just to test database functions,
-outside of Flask.
-We want to open our MongoDB database,
-insert some memos, and read them back
-"""
-
 import pymongo
 from pymongo import MongoClient
 import arrow
@@ -32,6 +25,7 @@ except Exception as err:
     sys.exit(1)
 
 #prints out all of the records in the database
+#TODO: This is how Sam does it. Use as Guide
 records = [ ] 
 for record in collection.find( { "type": "event" } ):
    records.append(
