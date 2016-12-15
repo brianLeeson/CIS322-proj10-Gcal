@@ -1,4 +1,4 @@
-# proj10-MeetMe
+# proj10-MeetMe -  WIP
 AUTHOR: Brian Leeson, bel@cs.uoregon.edu  
 Skeleton code created by instructor: Michael Young  
 
